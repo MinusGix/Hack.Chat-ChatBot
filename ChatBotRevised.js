@@ -4,7 +4,7 @@
 //
 
 var stopAll = false;
-
+var specialTest;
 function pushMessage(nick, text, time, cls) {
         var messageEl = document.createElement('div')
         messageEl.classList.add('message')
@@ -87,6 +87,7 @@ function CommandCheck( msg, nick ){
     	        return;
     	    }
     	};
+		
 	}
 }
 
@@ -109,6 +110,14 @@ function GetCommands(){
         str += key[i] + ", "
     };
     return str
+}
+
+function strJoiner( arr ){ 
+   var str = ""
+   for( var i = 0; i < arr.length; i++ ){
+       str += arr[i] + ""
+   }
+   return str
 }
 
 function SendRPS( ans, nick ){
@@ -165,9 +174,18 @@ function SendRPS( ans, nick ){
 }
 
 AddCommand( "hello", "hello %nick%!" )
+AddCommand("kill", function(args, nick) {
+	SendMessage('"Ok," *stabs ' + strJoiner(args) + ' in the gut*' )
+	
+	} )
+AddCommand( "var", function(arks, nick) {
+	//please note that this command does not work yet
+})
+AddCommand( "killme", '"Ok!" *stabs %nick% in the gut*.')
+AddCommand( "creator", "MinusGix/Missing Minus(same person) created this bot!")
 AddCommand( "cry", "%nick% starts crying: wah waha wahhh" )
 AddCommand( "suicide", "\"Seppuku!!!\" \n *jumps off building*" )
-AddCommand( "source", "http://pastebin.com/4NgiBDPe please note it may not be up to date" )
+AddCommand( "source", "https://github.com/MinusGix/Hack.Chat-ChatBot please note it may not be up to date" )
 AddCommand( "laugh", "%nick% stars laughing: \"HAHAHAHAA\"" )
 AddCommand( "coffee", "*Hands a cup of coffee to %nick%*" )
 AddCommand( "taco", "Eww, I don't like tacos, have a burrito instead." )
@@ -198,6 +216,9 @@ AddCommand( "startthebots", function(isAuthed, nick){
 })
 
 AddCommand( "gaben", "GABEN IS GOD!" )
+AddCommand( "bye", "Bye bye %nick%!")
+AddCommand( "kittycat", "Link: http://thecatapi.com/api/images/get gives random kittehs :3")
+AddCommand( "beer", "gives a beer from the cooler to %nick%")
 AddCommand( "foobar", "foobar" )
 AddCommand( "foo", "bar" )
 AddCommand( "bar", "foo" )
@@ -227,3 +248,4 @@ AddCommand( 'lizard', function( args, nick ){
 })
 
 AddCommand( "commands",  "commands: \n (Add a / before them) \n" + GetCommands() ) // For this to function properly, make sure it is the last command added.
+SendMessage("Initialized")
