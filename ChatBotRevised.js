@@ -5,57 +5,11 @@
 
 var stopAll = false;
 var specialTest;
-function pushMessage(nick, text, time, cls) {
-        var messageEl = document.createElement('div')
-        messageEl.classList.add('message')
-        if (cls) {
-                messageEl.classList.add(cls)
-        }
-       
-        var nickEl = document.createElement('span')
-        nickEl.classList.add('nick')
-        nickEl.textContent = nick || ''
-        if (time) {
-                var date = new Date(time)
-                nickEl.title = date.toLocaleString()
-        }
-        nickEl.onclick = function() {
-                insertAtCursor("@" + nick + " ")
-                $('#chatinput').focus()
-        }
-        messageEl.appendChild(nickEl)
- 
-        var textEl = document.createElement('pre')
-        textEl.classList.add('text')
- 
-        textEl.textContent = text || ''
-        textEl.innerHTML = textEl.innerHTML.replace(/(\?|https?:\/\/)\S+?(?=[,.!?:)]?\s|$)/g, parseLinks)
- 
-        if ($('#parse-latex').checked) {
-                // Temporary hotfix for \rule spamming, see https://github.com/Khan/KaTeX/issues/109
-                textEl.innerHTML = textEl.innerHTML.replace(/\\rule|\\\\\s*\[.*?\]/g, '')
-                try {
-                        renderMathInElement(textEl, {delimiters: [
-                                {left: "$$", right: "$$", display: true},
-                                {left: "$", right: "$", display: false},
-                        ]})
-                }
-                catch (e) {
-                        console.warn(e)
-                }
-        }
- 
-        messageEl.appendChild(textEl)
- 
-        var atBottom = isAtBottom()
-        $('#messages').appendChild(messageEl)
-        if (atBottom) {
-                window.scrollTo(0, document.body.scrollHeight)
-        }
- 
-        unread += 1
-        updateTitle()
-        MessageRecieved( text, nick, cls )
+var pushMessageOrig = pushMessage;
+
+pushMessage = function(args) {
+	pushMessageOrig(args);
+	MessageRecieved(args.text, args.nick, undefined);
 }
  
 //end of special function changing and start of my code
