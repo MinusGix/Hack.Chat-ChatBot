@@ -3,6 +3,6 @@ A chat bot for Hack.Chat
 
 When you get the file downloaded, follow a guide on how to open of your javascript console for your browser.
 Then paste it into it, and it will run.
+When ran, you will see different console messages that tell what is happening for debugging purposes.
 
-BE CAREFUL IF YOU MAKE ANY CHANGES DO NOT PASTE INTO A TAB ALREADY RUNNING THE BOT, BECAUSE THAT CAN CAUSE YOUR BROWSER TO GO BOOM
-
+Whenever you change it and want to run the updated version refresh the page otherwise you will get errors.
